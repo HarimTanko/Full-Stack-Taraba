@@ -1,43 +1,68 @@
 import React from 'react';
-import { Grid, Typography } from '@material-ui/core';
+import { useDispatch } from 'react-redux';
+import {
+  Typography,
+  Button,
+  Card,
+  CardContent,
+  CardMedia,
+  CardActions,
+} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
 
-import useStyles from './styles';
+import { deleteProject } from '../../../actions/projects';
 
-import flyover from '../../../images/flyover.JPG';
+//import useStyles from './styles';
 
-const Project = () => {
-  const classes = useStyles();
+const Project = ({ project, setCurrentId }) => {
+  const dispatch = useDispatch();
+  //const classes = useStyles();
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} md={6}>
-        <Typography variant='h4' gutterBottom component='div'>
-          Project Name
-        </Typography>
-        <Typography variant='h6'>Project Location</Typography>
-        <Typography variant='h6'> Road Length</Typography>
-        <Typography variant='h6'> Contract Sum Length</Typography>
-        <Typography variant='h6'> Contract Duration</Typography>
-        <Typography variant='body1'>
-          Project description Lorem ipsum, dolor sit amet consectetur
-          adipisicing elit. Tempora nulla labore quos fugiat inventore placeat
-          vel numquam cupiditate est odit non suscipit, recusandae eligendi
-          magnam blanditiis enim dolorem! Illum, incidunt?Lorem ipsum dolor sit
-          amet consectetur adipisicing elit. Iste assumenda laborum nam quae
-          cupiditate, perspiciatis est commodi ducimus aliquid repellendus
-          dolorem sint illum accusamus perferendis voluptates tempore ipsam
-          nostrum sit.
-        </Typography>
-        <Typography variant='body2'>Project engineer</Typography>
-      </Grid>
-      <Grid item xs={12} md={6}>
-        <img
-          src={flyover}
+    <>
+      <Card xs={12} md={4} style={{ maxWidth: 400 }}>
+        <CardMedia
+          component='img'
+          height='440'
+          image={project.selectedFile}
           alt='project'
-          height='400'
-          className={classes.projectImage}
         />
-      </Grid>
-    </Grid>
+        <CardContent>
+          <Typography variant='h4' gutterBottom>
+            {project.name}
+          </Typography>
+          <Typography variant='h5' gutterBottom>
+            {project.location}
+          </Typography>
+
+          <Typography variant='body2'>{project.description}</Typography>
+        </CardContent>
+        <CardActions>
+          <Button size='small' color='primary' onClick={() => {}}>
+            {' '}
+            View Reports
+          </Button>
+          <Button
+            size='small'
+            color='primary'
+            onClick={() => {
+              setCurrentId(project._id);
+            }}
+          >
+            Edit
+          </Button>
+          <Button
+            size='small'
+            color='secondary'
+            onClick={() => {
+              dispatch(deleteProject(project._id));
+            }}
+          >
+            <DeleteIcon fontSize='small' />
+            Delete
+          </Button>
+        </CardActions>
+      </Card>
+    </>
   );
 };
 

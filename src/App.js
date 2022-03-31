@@ -1,27 +1,16 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  Box,
-  Container,
-  AppBar,
-  Button,
-  Typography,
-  Grid,
-  Toolbar,
-  IconButton,
-} from '@material-ui/core';
+import { Container, Grid } from '@material-ui/core';
 
 import Projects from './components/Projects/Projects';
 import Form from './components/Form/Form';
+import Navbar from './components/Navbar/Navbar';
 
 import { getProjects } from './actions/projects';
 
-import logo from './images/logo.jpeg';
-
-import useStyles from './styles';
-
 const App = () => {
-  const classes = useStyles();
+  const [currentId, setCurrentId] = useState(null);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,35 +19,15 @@ const App = () => {
 
   return (
     <Container maxWidth='lg'>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar className={classes.appBar} position='static' color='inherit'>
-          <Toolbar>
-            <IconButton edge='start' aria-label='menu' sx={{ mr: 2 }}>
-              <img
-                className={classes.image}
-                src={logo}
-                alt='logo'
-                height='50'
-              />
-            </IconButton>
-
-            <Typography className={classes.title} variant='h5'>
-              {' '}
-              Taraba Works
-            </Typography>
-
-            <Button variant='outlined'>Admin</Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
+      <Navbar />
 
       <Container>
         <Grid container direction='row' alignItems='center'>
           <Grid item xs={12}>
-            <Projects />
+            <Projects setCurrentId={setCurrentId} />
           </Grid>
           <Grid item xs={12}>
-            <Form />
+            <Form currentId={currentId} setCurrentId={setCurrentId} />
           </Grid>
         </Grid>
       </Container>
