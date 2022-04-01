@@ -12,4 +12,11 @@ export default makeStyles(() => ({
     flexDirection: 'row',
     alignItems: 'center',
   },
+
+  profile: {
+    width: '400px',
+    display: 'flex',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
 }));
