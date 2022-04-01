@@ -1,37 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { Container, Grid } from '@material-ui/core';
+import React from 'react';
 
-import Projects from './components/Projects/Projects';
-import Form from './components/Form/Form';
+import { Container } from '@material-ui/core';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import Navbar from './components/Navbar/Navbar';
-
-import { getProjects } from './actions/projects';
+import Home from './components/Home/Home';
+import Auth from './components/Auth/Auth';
 
 const App = () => {
-  const [currentId, setCurrentId] = useState(null);
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getProjects());
-  }, [dispatch]);
-
   return (
-    <Container maxWidth='lg'>
+    <Router>
       <Navbar />
 
-      <Container>
-        <Grid container direction='row' alignItems='center'>
-          <Grid item xs={12}>
-            <Projects setCurrentId={setCurrentId} />
-          </Grid>
-          <Grid item xs={12}>
-            <Form currentId={currentId} setCurrentId={setCurrentId} />
-          </Grid>
-        </Grid>
+      <Container maxWidth='lg'>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/auth' element={<Auth />} />
+        </Routes>
       </Container>
-    </Container>
+    </Router>
   );
 };
 

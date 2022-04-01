@@ -41,6 +41,7 @@ const Project = ({ project, setCurrentId }) => {
             {' '}
             View Reports
           </Button>
+
           <Button
             size='small'
             color='primary'

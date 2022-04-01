@@ -14,7 +14,7 @@ const Projects = ({ setCurrentId }) => {
   ) : (
     <Grid container className={classes.container}>
       {projects.map((project) => (
-        <Grid item key={project._id}>
+        <Grid item key={project._id} className={classes.projects}>
           <Project project={project} setCurrentId={setCurrentId} />
         </Grid>
       ))}

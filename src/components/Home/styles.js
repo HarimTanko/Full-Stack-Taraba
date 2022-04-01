@@ -1,13 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 
 export default makeStyles(() => ({
-  container: {
-    margin: '4rem 0',
+  projects: {
     display: 'flex',
     justifyContent: 'space-around',
-  },
-
-  projects: {
-    margin: '3rem 0',
   },
 }));
